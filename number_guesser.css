@@ -6,12 +6,15 @@ h1 {
 .headline {
   display: flex;
   justify-content: center;
+  background-color: #404041
 }
 
-.number {
-  font-weight: 700;
+.number_headline {
+  color: #ED458B;
+  font-weight: bold;
 }
 
-.guesser {
-  font-weight: 300;
+.guesser_headline {
+  color: #E6E7E8;
+  font-weight: light;
 }

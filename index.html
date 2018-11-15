@@ -27,14 +27,22 @@
     // the user enters a guess
     // display the guess
       function displayGuess() {
-        let userGuess = document.getElementById("user-guess").value;
+        let userGuess = parseInt(document.getElementById("user-guess").value);
         let guessMessage = document.getElementById('message');
-        guessMessage.innerHTML = `Your last guess was ${userGuess}.`;
+        // the guess is compared to the secret to see if it's too high, too low, or a match
+        // display the guess and whether it's too high, too low, or match
+        if (userGuess === secretNumber) {
+          guessMessage.innerHTML = `BOOM. Correct guess, you win!`;
+        } else if (userGuess > secretNumber) {
+          guessMessage.innerHTML = `Your last guess was ${userGuess}. That is too high.`;
+        } else if (userGuess < secretNumber) {
+          guessMessage.innerHTML = `Your last guess was ${userGuess}. That is too low.`;
+        } else {
+          guessMessage.innerHTML = `${userGuess} is not a number between 1-100, guess again!`;
+        }
       }
-    // the guess is compared to the secret to see if it's too high, too low, or a match
-    // display the guess and whether it's too high, too low, or match
-    // there is a button to reset the game
     // there is a button the clear the input field
+    // there is a button to reset the game
 
     </script>
   </body>

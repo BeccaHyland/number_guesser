@@ -15,10 +15,18 @@
     <div class=guess-form>
       <input type="text" name="guess" id="user-guess" placeholder="Enter your guess"/>
       <input type="button" name="submit" value="Guess" onclick="displayGuess()"/>
+
+      <!-- there is a button to clear the input field -->
+      <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''"/>
     </div>
 
     <div class=guess-message>
       <h3 id="message"></h3>
+    </div>
+
+    <!-- there is a button to reset the game -->
+    <div class=reset-game>
+      <input type="button" name="reset" value="Reset" onclick="resetGame()"/>
     </div>
 
     <script>
@@ -41,8 +49,10 @@
           guessMessage.innerHTML = `${userGuess} is not a number between 1-100, guess again!`;
         }
       }
-    // there is a button the clear the input field
-    // there is a button to reset the game
+
+      function resetGame() {
+        userGuess = 
+      }
 
     </script>
   </body>

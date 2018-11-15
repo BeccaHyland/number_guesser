@@ -15,7 +15,6 @@
     <div class=guess-form>
       <input type="text" name="guess" id="user-guess" placeholder="Enter your guess"/>
       <input type="button" name="submit" value="Guess" onclick="displayGuess()"/>
-
       <!-- there is a button to clear the input field -->
       <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''"/>
     </div>
@@ -51,7 +50,10 @@
       }
 
       function resetGame() {
-        userGuess = 
+        let guessMessage = document.getElementById('message');
+        secretNumber = Math.floor(Math.random() * 100) + 1;
+        guessMessage.innerHTML = '';
+        document.getElementById('user-guess').value = '';
       }
 
     </script>

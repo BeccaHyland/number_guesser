@@ -23,3 +23,8 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.guess-message {
+  display: flex;
+  justify-content: center;
+}

@@ -6,15 +6,30 @@
   </head>
   <body>
 
-    
+
     <div class=headline>
       <h1 class=number_headline>Number</h1>
       <h1 class=guesser_headline>Guesser</h1>
     </div>
 
+    <div class=guess-form>
+      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess"/>
+      <input type="button" name="submit" value="Guess" onclick="displayGuess()"/>
+    </div>
 
     <script>
-
+    // generate a random number between 1-100
+      let secretNumber = Math.floor(Math.random() * 100) + 1
+    // the user enters a guess
+    // display the guess
+      function displayGuess() {
+        let userGuess = document.getElementById("user-guess").value;
+        alert(`Your guess was ${userGuess}.`);
+      }
+    // the guess is compared to the secret to see if it's too high, too low, or a match
+    // display the guess and whether it's too high, too low, or match
+    // there is a button to reset the game
+    // there is a button the clear the input field
 
     </script>
   </body>

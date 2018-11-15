@@ -18,3 +18,8 @@ h1 {
   color: #E6E7E8;
   font-weight: light;
 }
+
+.guess-form {
+  display: flex;
+  justify-content: center;
+}

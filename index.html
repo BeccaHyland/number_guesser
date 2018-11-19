@@ -68,7 +68,7 @@
       function enableClear() {
         let guessField = document.getElementById('user-guess');
         let clearButton = document.getElementById('clear');
-        if (parseInt(guessField.value).length == 0 ) {
+        if (parseInt(guessField.value) == '') {
           clearButton.disabled=true;
         } else {
           clearButton.disabled=false;

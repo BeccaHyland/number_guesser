@@ -12,9 +12,18 @@
       <h1 class=guesser_headline>Guesser</h1>
     </div>
 
+    <div class=range-input>
+      <h5>Enter the range for your guessing game</h5>
+      <!-- additional inputs that allow the user to specify the minimum/maximum range -->
+      <input type="text" name="low" id="range-low-end" placeholder="1" >
+      <input type="text" name="high" id="range-high-end" placeholder="100" >
+      <input type="button" name="submit" value="Submit Range" onclick="setRange()">
+    </div>
+
+
     <div class=guess-form>
-      <!-- input only accepts numberical entries 1-100 -->
       <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" >
+      <!-- input only accepts numberical entries 1-100 -->
       <input type="button" name="submit" value="Guess" onclick="validateInput()">
       <!-- there is a button to clear the input field -->
       <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''">
@@ -31,7 +40,17 @@
 
     <script>
     // generate a random number between 1-100
+    let rangeHiEnd = parseInt(document.getElementById("range-high-end").value);
+    let rangeLoEnd = parseInt(document.getElementById("range-low-end").value);
+
+
+      if rangeHiEnd == null
       let secretNumber = Math.floor(Math.random() * 100) + 1;
+
+      function setRange() {
+        let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
+      }
+
     // the user enters a guess
     // display the guess
       function displayGuess() {

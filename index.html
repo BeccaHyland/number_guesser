@@ -4,8 +4,8 @@
     <link rel="stylesheet" type="text/css" href="number_guesser.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   </head>
-  <body>
 
+  <body>
 
     <div class=headline>
       <h1 class=number_headline>Number</h1>
@@ -22,11 +22,14 @@
 
 
     <div class=guess-form>
-      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" >
       <!-- input only accepts numberical entries 1-100 -->
+      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" onkeyup="enableClear()">
       <input type="button" name="submit" value="Guess" onclick="validateInput()">
       <!-- there is a button to clear the input field -->
-      <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''">
+      <!-- clear button starts disabled -->
+      <!-- user enters value into guess field above, activating oninput property-->
+      <!-- clear button is enabled -->
+      <button type="button" id="clear" onclick="document.getElementById('user-guess').value = ''" disabled>Clear</button>
     </div>
 
     <div class=guess-message>
@@ -43,14 +46,24 @@
     let rangeHiEnd = parseInt(document.getElementById("range-high-end").value);
     let rangeLoEnd = parseInt(document.getElementById("range-low-end").value);
 
+    function setRange() {
+      let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
+    }
 
       if rangeHiEnd == null
       let secretNumber = Math.floor(Math.random() * 100) + 1;
 
-      function setRange() {
-        let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
+      function validateInput() {
+        const x = document.getElementById("user-guess").value;
+        if (isNaN(x)) {
+          document.getElementById('user-guess').value = '';
+          alert("Oops, that's not a number. Try a guess between 1-100!");
+        } else if (x < 1 || x > 100) {
+          document.getElementById('user-guess').value = '';
+          alert("Oops! Your guess was not between 1-100, try again!");
+        } else
+        displayGuess();
       }
-
     // the user enters a guess
     // display the guess
       function displayGuess() {
@@ -69,25 +82,22 @@
         }
       }
 
+      function enableClear() {
+        let guessField = document.getElementById('user-guess');
+        let clearButton = document.getElementById('clear');
+        if (guessField.value == '') {
+          clearButton.disabled=true;
+        } else {
+          clearButton.disabled=false;
+        }
+      }
+
       function resetGame() {
         let guessMessage = document.getElementById('message');
         secretNumber = Math.floor(Math.random() * 100) + 1;
         guessMessage.innerHTML = '';
         document.getElementById('user-guess').value = '';
       }
-
-      function validateInput() {
-        const x = document.getElementById("user-guess").value;
-        if (isNaN(x)) {
-          document.getElementById('user-guess').value = '';
-          alert("Oops, that's not a number. Try a guess between 1-100!");
-        } else if (x < 1 || x > 100) {
-          document.getElementById('user-guess').value = '';
-          alert("Oops! Your guess was not between 1-100, try again!");
-        } else
-        displayGuess();
-      }
-
     </script>
   </body>
 </HTML>

@@ -59,9 +59,12 @@
 
       function validateInput() {
         const x = document.getElementById("user-guess").value;
-        if (x < 1 || x > 100) {
+        if (isNaN(x)) {
           document.getElementById('user-guess').value = '';
-          alert("Oops! Please enter a number 1-100");
+          alert("Oops, that's not a number. Try a guess between 1-100!");
+        } else if (x < 1 || x > 100) {
+          document.getElementById('user-guess').value = '';
+          alert("Oops! Your guess was not between 1-100, try again!");
         } else
         displayGuess();
       }

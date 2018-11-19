@@ -13,10 +13,11 @@
     </div>
 
     <div class=guess-form>
-      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess"/>
-      <input type="button" name="submit" value="Guess" onclick="displayGuess()"/>
+      <!-- input only accepts numberical entries 1-100 -->
+      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" >
+      <input type="button" name="submit" value="Guess" onclick="validateInput()">
       <!-- there is a button to clear the input field -->
-      <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''"/>
+      <input type="button" name="clear" value="Clear" onclick="document.getElementById('user-guess').value = ''">
     </div>
 
     <div class=guess-message>
@@ -54,6 +55,15 @@
         secretNumber = Math.floor(Math.random() * 100) + 1;
         guessMessage.innerHTML = '';
         document.getElementById('user-guess').value = '';
+      }
+
+      function validateInput() {
+        const x = document.getElementById("user-guess").value;
+        if (x < 1 || x > 100) {
+          document.getElementById('user-guess').value = '';
+          alert("Oops! Please enter a number 1-100");
+        } else
+        displayGuess();
       }
 
     </script>

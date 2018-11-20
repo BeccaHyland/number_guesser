@@ -17,7 +17,7 @@
     </div>
 
     <div class=range-instructions>
-      <h5>Or enter a new range for your guessing game: </h5>
+      <h5>Or enter a new range for your game: </h5>
     </div>
 
     <div class=range-input>
@@ -59,22 +59,31 @@
 
       // user new values to reset secret number
       function setRange () {
-        rangeLoEnd = parseInt(document.getElementById('range-low-end').value);
-        rangeHiEnd = parseInt(document.getElementById('range-high-end').value);
-        secretNumber = Math.floor(Math.random() * (rangeHiEnd - rangeLoEnd)) + rangeLoEnd;
+        let loEntry = document.getElementById('range-low-end').value;
+        let hiEntry = document.getElementById('range-high-end').value;
 
-        let rangeMessage = document.getElementById('range-feedback');
-        rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
+        if ( isNaN(loEntry) || isNaN(hiEntry) ) {
+          alert(`Oops, make sure the range is numbers!`);
+        } else if (loEntry >= hiEntry) {
+          alert(`Oops, make sure the starting number is lower than the ending number!`)
+        } else {
+          rangeLoEnd = parseInt(loEntry);
+          rangeHiEnd = parseInt(hiEntry);
+          secretNumber = Math.floor(Math.random() * (rangeHiEnd - rangeLoEnd)) + rangeLoEnd;
+
+          let rangeMessage = document.getElementById('range-feedback');
+          rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`;
+        }
       }
 
       function validateInput() {
         const x = document.getElementById("user-guess").value;
         if (isNaN(x)) {
           document.getElementById('user-guess').value = '';
-          alert("Oops, that's not a number. Try a guess between 1-100!");
-        } else if (x < 1 || x > 100) {
+          alert(`Oops, that's not a number. Try a guess between ${rangeLoEnd}-${rangeHiEnd}!`);
+        } else if (x < rangeLoEnd || x > rangeHiEnd) {
           document.getElementById('user-guess').value = '';
-          alert("Oops! Your guess was not between 1-100, try again!");
+          alert(`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
         } else
         displayGuess();
       }

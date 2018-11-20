@@ -28,7 +28,7 @@
     </div>
 
     <div class=guess-message>
-      <p id=guess-feedback>You can do it!</p>
+      <p id=guess-feedback>Make your first guess below!</p>
     </div>
 
     <div class=guess-form>
@@ -92,9 +92,10 @@
       }
     // the user enters a guess
     // display the guess
+    let guessMessage = document.getElementById('guess-feedback');
+
       function displayGuess() {
         let userGuess = parseInt(document.getElementById("user-guess").value);
-        let guessMessage = document.getElementById('guess-feedback');
         // the guess is compared to the secret to see if it's too high, too low, or a match
         // display the guess and whether it's too high, too low, or match
         if (userGuess === secretNumber) {
@@ -128,9 +129,8 @@
         let rangeMessage = document.getElementById('range-feedback');
         rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
 
-        let guessMessage = document.getElementById('guess-feedback');
         secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
-        guessMessage.innerHTML = '';
+        guessMessage.innerHTML = 'Make your first guess below!';
         document.getElementById('user-guess').value = '';
         document.getElementById('range-low-end').value = '';
         document.getElementById('range-high-end').value = '';

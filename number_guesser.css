@@ -34,6 +34,11 @@ h1 {
   font-weight: light;
 }
 
+.result-message {
+  display: flex;
+  justify-content: center;
+}
+
 .guess-message {
   display: flex;
   justify-content: center;

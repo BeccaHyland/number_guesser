@@ -9,6 +9,21 @@ h1 {
   background-color: #404041
 }
 
+.range-message {
+  display: flex;
+  justify-content: center;
+}
+
+.range-instructions {
+  display: flex;
+  justify-content: center;
+}
+
+.range-input {
+  display: flex;
+  justify-content: center;
+}
+
 .number_headline {
   color: #ED458B;
   font-weight: bold;
@@ -19,12 +34,12 @@ h1 {
   font-weight: light;
 }
 
-.guess-form {
+.guess-message {
   display: flex;
   justify-content: center;
 }
 
-.guess-message {
+.guess-form {
   display: flex;
   justify-content: center;
 }

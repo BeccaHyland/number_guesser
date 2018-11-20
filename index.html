@@ -27,8 +27,8 @@
       <input type="button" name="submit" value="Submit Range" onclick="setRange()">
     </div>
 
-    <div class=encourage>
-      <p>You can do it!</p>
+    <div class=guess-message>
+      <p id=guess-feedback>You can do it!</p>
     </div>
 
     <div class=guess-form>
@@ -40,10 +40,6 @@
       <!-- user enters value into guess field above, activating oninput property-->
       <!-- clear button is enabled -->
       <button type="button" id="clear" onclick="document.getElementById('user-guess').value = ''" disabled>Clear</button>
-    </div>
-
-    <div class=guess-message>
-      <h3 id="guess-feedback"></h3>
     </div>
 
     <!-- there is a button to reset the game -->
@@ -81,7 +77,6 @@
           enableReset();
         }
       }
-
 
       function validateInput() {
         const x = document.getElementById("user-guess").value;

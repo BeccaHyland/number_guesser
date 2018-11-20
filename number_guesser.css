@@ -24,6 +24,11 @@ h1 {
   justify-content: center;
 }
 
+.encourage {
+  display: flex;
+  justify-content: center;
+}
+
 .number_headline {
   color: #ED458B;
   font-weight: bold;

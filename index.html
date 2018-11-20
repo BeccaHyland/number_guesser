@@ -44,7 +44,7 @@
 
     <!-- there is a button to reset the game -->
     <div class=reset-game>
-      <input type="button" name="reset" value="Reset" onclick="resetGame()"/>
+      <input type="button" name="reset" id="reset" value="Reset" onclick="resetGame()" disabled/>
     </div>
 
     <script>
@@ -56,6 +56,7 @@
       // let secretNumber = Math.floor(Math.random() * 100) + 1; (old code)
 
       let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
+      let resetButton = document.getElementById('reset');
 
       // user new values to reset secret number
       function setRange () {
@@ -65,7 +66,7 @@
         if ( isNaN(loEntry) || isNaN(hiEntry) ) {
           alert(`Oops, make sure the range is numbers!`);
         } else if (loEntry >= hiEntry) {
-          alert(`Oops, make sure the starting number is lower than the ending number!`)
+          alert(`Oops, starting number must be lower than ending number!`)
         } else {
           rangeLoEnd = parseInt(loEntry);
           rangeHiEnd = parseInt(hiEntry);
@@ -73,8 +74,10 @@
 
           let rangeMessage = document.getElementById('range-feedback');
           rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`;
+          enableReset();
         }
       }
+
 
       function validateInput() {
         const x = document.getElementById("user-guess").value;
@@ -86,6 +89,7 @@
           alert(`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
         } else
         displayGuess();
+        enableReset();
       }
     // the user enters a guess
     // display the guess
@@ -115,6 +119,10 @@
         }
       }
 
+      function enableReset() {
+        resetButton.disabled=false;
+      }
+
       function resetGame() {
         rangeLoEnd = 1
         rangeHiEnd = 100
@@ -127,6 +135,7 @@
         document.getElementById('user-guess').value = '';
         document.getElementById('range-low-end').value = '';
         document.getElementById('range-high-end').value = '';
+        resetButton.disabled=true;
       }
     </script>
   </body>

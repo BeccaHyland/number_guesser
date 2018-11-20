@@ -9,6 +9,16 @@ h1 {
   background-color: #404041
 }
 
+.range-message {
+  display: flex;
+  justify-content: center;
+}
+
+.range-instructions {
+  display: flex;
+  justify-content: center;
+}
+
 .range-input {
   display: flex;
   justify-content: center;

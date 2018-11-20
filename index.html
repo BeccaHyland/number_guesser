@@ -12,14 +12,20 @@
       <h1 class=guesser_headline>Guesser</h1>
     </div>
 
-    <div class=range-input>
-      <h5>Enter the range for your guessing game</h5>
-      <!-- additional inputs that allow the user to specify the minimum/maximum range -->
-      <input type="text" name="low" id="range-low-end" placeholder="1" >
-      <input type="text" name="high" id="range-high-end" placeholder="100" >
-      <input type="button" name="submit" value="Submit Range" onclick="setRange()">
+    <div class=range-message>
+      <h3 id="range-feedback">Guess a number between 1 and 100...</h3>
     </div>
 
+    <div class=range-instructions>
+      <h5>Or enter a new range for your guessing game: </h5>
+    </div>
+
+    <div class=range-input>
+      <!-- additional inputs that allow the user to specify the minimum/maximum range -->
+      <input type="text" name="low" id="range-low-end" placeholder="Start at..." >
+      <input type="text" name="high" id="range-high-end" placeholder="End at..." >
+      <input type="button" name="submit" value="Submit Range" onclick="setRange()">
+    </div>
 
     <div class=guess-form>
       <!-- input only accepts numberical entries 1-100 -->
@@ -33,7 +39,7 @@
     </div>
 
     <div class=guess-message>
-      <h3 id="message"></h3>
+      <h3 id="guess-feedback"></h3>
     </div>
 
     <!-- there is a button to reset the game -->
@@ -42,16 +48,24 @@
     </div>
 
     <script>
-    // generate a random number between 1-100
-    let rangeHiEnd = parseInt(document.getElementById("range-high-end").value);
-    let rangeLoEnd = parseInt(document.getElementById("range-low-end").value);
+    // set default guessing range limits
+      let rangeLoEnd = 1
+      let rangeHiEnd = 100
 
-    function setRange() {
+      // generate a random number between 1-100
+      // let secretNumber = Math.floor(Math.random() * 100) + 1; (old code)
+
       let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
-    }
 
-      if rangeHiEnd == null
-      let secretNumber = Math.floor(Math.random() * 100) + 1;
+      // user new values to reset secret number
+      function setRange () {
+        rangeLoEnd = parseInt(document.getElementById('range-low-end').value);
+        rangeHiEnd = parseInt(document.getElementById('range-high-end').value);
+        secretNumber = Math.floor(Math.random() * (rangeHiEnd - rangeLoEnd)) + rangeLoEnd;
+
+        let rangeMessage = document.getElementById('range-feedback');
+        rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
+      }
 
       function validateInput() {
         const x = document.getElementById("user-guess").value;
@@ -68,17 +82,17 @@
     // display the guess
       function displayGuess() {
         let userGuess = parseInt(document.getElementById("user-guess").value);
-        let guessMessage = document.getElementById('message');
+        let guessMessage = document.getElementById('guess-feedback');
         // the guess is compared to the secret to see if it's too high, too low, or a match
         // display the guess and whether it's too high, too low, or match
         if (userGuess === secretNumber) {
           guessMessage.innerHTML = `BOOM. Correct guess, you win!`;
         } else if (userGuess > secretNumber) {
-          guessMessage.innerHTML = `Your last guess was ${userGuess}. That is too high.`;
+          guessMessage.innerHTML = `You guessed ${userGuess}. That is too high.`;
         } else if (userGuess < secretNumber) {
-          guessMessage.innerHTML = `Your last guess was ${userGuess}. That is too low.`;
+          guessMessage.innerHTML = `You guessed ${userGuess}. That is too low.`;
         } else {
-          guessMessage.innerHTML = `${userGuess} is not a number between 1-100, guess again!`;
+          guessMessage.innerHTML = `Oops, something went wrong. Please refresh page.`;
         }
       }
 
@@ -93,10 +107,17 @@
       }
 
       function resetGame() {
-        let guessMessage = document.getElementById('message');
-        secretNumber = Math.floor(Math.random() * 100) + 1;
+        rangeLoEnd = 1
+        rangeHiEnd = 100
+        let rangeMessage = document.getElementById('range-feedback');
+        rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
+
+        let guessMessage = document.getElementById('guess-feedback');
+        secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
         guessMessage.innerHTML = '';
         document.getElementById('user-guess').value = '';
+        document.getElementById('range-low-end').value = '';
+        document.getElementById('range-high-end').value = '';
       }
     </script>
   </body>

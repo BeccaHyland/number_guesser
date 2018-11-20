@@ -32,7 +32,7 @@
     </div>
 
     <div class=guess-message>
-      <p id=guess-feedback>Make your first guess below.</p>
+      <p id=guess-feedback>Make your first guess below</p>
     </div>
 
     <div class=guess-form>
@@ -57,11 +57,11 @@
       let rangeHiEnd = 100
 
       // generate a random number between 1-100
-      // let secretNumber = Math.floor(Math.random() * 100) + 1; (old code)
-
       let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
 
       let resetButton = document.getElementById('reset');
+      let guessMessage = document.getElementById('guess-feedback');
+      let resultMessage = document.getElementById('result-feedback');
 
       // user new values to reset secret number
       function setRange () {
@@ -79,6 +79,8 @@
 
           let rangeMessage = document.getElementById('range-feedback');
           rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`;
+          guessMessage.innerHTML = `Make your first guess below`
+          resultMessage.innerHTML = ``
           enableReset();
         }
       }
@@ -96,8 +98,6 @@
         enableReset();
       }
 
-      let guessMessage = document.getElementById('guess-feedback');
-      let resultMessage = document.getElementById('result-feedback');
     // the user enters a guess
     // display the guess
 
@@ -108,8 +108,9 @@
         // display the guess and whether it's too high, too low, or match
         if (userGuess === secretNumber) {
           let newRangeHiEnd = rangeHiEnd + 10;
-          resetGame(undefined, newRangeHiEnd);
-          resultMessage.innerHTML = `BOOM. Correct guess, you win! You clearly need a challenge. The guessing range just increased up to ${rangeHiEnd}.`;
+          let newRangeLoEnd = rangeLoEnd - 10;
+          resetGame(newRangeLoEnd, newRangeHiEnd);
+          resultMessage.innerHTML = `BOOM. Correct guess, you win! You clearly need a challenge. Your new guessing range is ${rangeLoEnd}-${rangeHiEnd}.`;
           console.log("secret = " + secretNumber);
         } else if (userGuess > secretNumber) {
           guessMessage.innerHTML = `You guessed ${userGuess}. That is too high.`;
@@ -137,14 +138,17 @@
       function resetGame(newRangeLoEnd = 1, newRangeHiEnd = 100) {
         rangeLoEnd = newRangeLoEnd
         rangeHiEnd = newRangeHiEnd
+        // clear the result message about the range change if this reset comes from the reset button instead of the win condition
         if (newRangeLoEnd == 1 && newRangeLoEnd == 100) {
           resultMessage.innerHTML = '';
         }
+        // reset the message informing user of current range
         let rangeMessage = document.getElementById('range-feedback');
         rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
 
+         // reset secret number and all other UI
         secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
-        guessMessage.innerHTML = 'New Game! Make your first guess below.';
+        guessMessage.innerHTML = 'New Game: make your first guess below';
         document.getElementById('user-guess').value = '';
         document.getElementById('range-low-end').value = '';
         document.getElementById('range-high-end').value = '';

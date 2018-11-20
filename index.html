@@ -21,10 +21,9 @@
     </div>
 
     <div class=range-input>
-      <!-- additional inputs that allow the user to specify the minimum/maximum range -->
-      <input type="text" name="low" id="range-low-end" placeholder="Start at..." >
-      <input type="text" name="high" id="range-high-end" placeholder="End at..." >
-      <input type="button" name="submit" value="Submit Range" onclick="setRange()">
+      <input type="text" id="range-low-end" placeholder="Start at..." >
+      <input type="text" id="range-high-end" placeholder="End at..." >
+      <input type="button" value="Submit Range" onclick="setRange()">
     </div>
 
     <div class=result-message>
@@ -36,19 +35,13 @@
     </div>
 
     <div class=guess-form>
-      <!-- input only accepts numberical entries 1-100 -->
-      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" onkeyup="enableClear()">
-      <input type="button" name="submit" value="Guess" onclick="validateInput()">
-      <!-- there is a button to clear the input field -->
-      <!-- clear button starts disabled -->
-      <!-- user enters value into guess field above, activating oninput property-->
-      <!-- clear button is enabled -->
+      <input type="text" id="user-guess" placeholder="Enter your guess" onkeyup="enableClear()">
+      <input type="button" value="Guess" onclick="validateInput()">
       <button type="button" id="clear" onclick="document.getElementById('user-guess').value = ''" disabled>Clear</button>
     </div>
 
-    <!-- there is a button to reset the game -->
     <div class=reset-game>
-      <input type="button" name="reset" id="reset" value="Reset" onclick="resetGame()" disabled/>
+      <input type="button" id="reset" value="Reset" onclick="resetGame()" disabled/>
     </div>
 
     <script src="number-guesser.js"></script>

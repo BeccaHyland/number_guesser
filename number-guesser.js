@@ -18,28 +18,28 @@
     if ( isNaN(loEntry) || isNaN(hiEntry) ) {
       alert(`Oops, make sure the range is numbers!`);
     } else if (loEntry >= hiEntry) {
-      console.log(loEntry);
-      console.log(hiEntry);
       alert(`Oops, starting number must be lower than ending number!`)
     } else {
       rangeLoEnd = loEntry;
       rangeHiEnd = hiEntry;
       resetGame(rangeLoEnd, rangeHiEnd);
-      console.log("secret = " + secretNumber);
     }
   }
 
   function validateInput() {
     const x = document.getElementById("user-guess").value;
     if (x == "cheat") {
-      guessMessage.innerHTML = `Decided to cheat, huh? OK, the answer is ${secretNumber}.`;
+      guessMessage.innerHTML =
+      `Decided to cheat, huh? OK, the answer is ${secretNumber}.`;
       enableReset();
     } else if (isNaN(x)) {
       document.getElementById('user-guess').value = '';
-      alert(`Oops, that's not a number. Try a guess between ${rangeLoEnd}-${rangeHiEnd}!`);
+      alert
+      (`Oops, that's not a number. Try a guess between ${rangeLoEnd}-${rangeHiEnd}!`);
     } else if (x < rangeLoEnd || x > rangeHiEnd) {
       document.getElementById('user-guess').value = '';
-      alert(`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
+      alert
+      (`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
     } else
     displayGuess();
     enableReset();
@@ -57,14 +57,13 @@
       let newRangeHiEnd = rangeHiEnd + 10;
       let newRangeLoEnd = rangeLoEnd - 10;
       resetGame(newRangeLoEnd, newRangeHiEnd);
-      resultMessage.innerHTML = `BOOM. Correct guess, you win! You clearly need a challenge. Your new guessing range is ${rangeLoEnd}-${rangeHiEnd}.`;
-      console.log("secret = " + secretNumber);
+      resultMessage.innerHTML =
+      `BOOM. Correct guess, you win! You clearly need a new challenge.
+      Your guessing range is now ${rangeLoEnd} - ${rangeHiEnd}.`;
     } else if (userGuess > secretNumber) {
       guessMessage.innerHTML = `You guessed ${userGuess}. That is too high.`;
-      console.log("secret = " + secretNumber);
     } else if (userGuess < secretNumber) {
       guessMessage.innerHTML = `You guessed ${userGuess}. That is too low.`;
-      console.log("secret = " + secretNumber);
     } else {
       guessMessage.innerHTML = `Oops, something went wrong. Please refresh page.`;
     }
@@ -93,7 +92,8 @@
     }
     // reset the message informing user of current range
     let rangeMessage = document.getElementById('range-feedback');
-    rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
+    rangeMessage.innerHTML =
+    `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
 
      // reset secret number and all other UI
     secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;

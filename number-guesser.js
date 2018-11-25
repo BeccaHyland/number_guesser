@@ -9,7 +9,10 @@
   let resetButton = document.getElementById('reset');
   let guessFeedback = document.getElementById('guess-feedback');
   let winFeedback = document.getElementById('result-feedback');
-  document.getElementById("range-submit").addEventListener("click", setRange);
+  let rangeButton = document.getElementById('range-submit');
+
+  resetButton.addEventListener("click", resetGame);
+  rangeButton.addEventListener("click", setRange);
 
   // user can reset guessing range
   function setRange() {
@@ -86,6 +89,9 @@
   }
 
   function resetGame(newRangeLoEnd = 1, newRangeHiEnd = 100) {
+    if (newRangeLoEnd == "[object MouseEvent]") {
+      newRangeLoEnd = 1;
+    }
     rangeLoEnd = newRangeLoEnd
     rangeHiEnd = newRangeHiEnd
     // clear the "new challenge" result  if this reset comes from reset button instead of win condition

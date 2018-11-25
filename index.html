@@ -21,121 +21,29 @@
     </div>
 
     <div class=range-input>
-      <!-- additional inputs that allow the user to specify the minimum/maximum range -->
-      <input type="text" name="low" id="range-low-end" placeholder="Start at..." >
-      <input type="text" name="high" id="range-high-end" placeholder="End at..." >
-      <input type="button" name="submit" value="Submit Range" onclick="setRange()">
+      <input type="text" id="range-low-end" placeholder="Start at..." >
+      <input type="text" id="range-high-end" placeholder="End at..." >
+      <input type="button" id="range-submit" value="Submit Range">
+    </div>
+
+    <div class=result-message>
+      <p id=result-feedback></p>
     </div>
 
     <div class=guess-message>
-      <p id=guess-feedback>Make your first guess below!</p>
+      <p id=guess-feedback>Make your first guess below:</p>
     </div>
 
     <div class=guess-form>
-      <!-- input only accepts numberical entries 1-100 -->
-      <input type="text" name="guess" id="user-guess" placeholder="Enter your guess" onkeyup="enableClear()">
-      <input type="button" name="submit" value="Guess" onclick="validateInput()">
-      <!-- there is a button to clear the input field -->
-      <!-- clear button starts disabled -->
-      <!-- user enters value into guess field above, activating oninput property-->
-      <!-- clear button is enabled -->
-      <button type="button" id="clear" onclick="document.getElementById('user-guess').value = ''" disabled>Clear</button>
+      <input type="text" id="user-guess" placeholder="Enter your guess">
+      <input type="button" id ="guess-submit" value="Guess">
+      <button type="button" id="clear" disabled>Clear</button>
     </div>
 
-    <!-- there is a button to reset the game -->
     <div class=reset-game>
-      <input type="button" name="reset" id="reset" value="Reset" onclick="resetGame()" disabled/>
+      <input type="button" id="reset" value="Reset" disabled/>
     </div>
 
-    <script>
-    // set default guessing range limits
-      let rangeLoEnd = 1
-      let rangeHiEnd = 100
-
-      // generate a random number between 1-100
-      // let secretNumber = Math.floor(Math.random() * 100) + 1; (old code)
-
-      let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
-      let resetButton = document.getElementById('reset');
-
-      // user new values to reset secret number
-      function setRange () {
-        let loEntry = document.getElementById('range-low-end').value;
-        let hiEntry = document.getElementById('range-high-end').value;
-
-        if ( isNaN(loEntry) || isNaN(hiEntry) ) {
-          alert(`Oops, make sure the range is numbers!`);
-        } else if (loEntry >= hiEntry) {
-          alert(`Oops, starting number must be lower than ending number!`)
-        } else {
-          rangeLoEnd = parseInt(loEntry);
-          rangeHiEnd = parseInt(hiEntry);
-          secretNumber = Math.floor(Math.random() * (rangeHiEnd - rangeLoEnd)) + rangeLoEnd;
-
-          let rangeMessage = document.getElementById('range-feedback');
-          rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`;
-          enableReset();
-        }
-      }
-
-      function validateInput() {
-        const x = document.getElementById("user-guess").value;
-        if (isNaN(x)) {
-          document.getElementById('user-guess').value = '';
-          alert(`Oops, that's not a number. Try a guess between ${rangeLoEnd}-${rangeHiEnd}!`);
-        } else if (x < rangeLoEnd || x > rangeHiEnd) {
-          document.getElementById('user-guess').value = '';
-          alert(`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
-        } else
-        displayGuess();
-        enableReset();
-      }
-    // the user enters a guess
-    // display the guess
-    let guessMessage = document.getElementById('guess-feedback');
-
-      function displayGuess() {
-        let userGuess = parseInt(document.getElementById("user-guess").value);
-        // the guess is compared to the secret to see if it's too high, too low, or a match
-        // display the guess and whether it's too high, too low, or match
-        if (userGuess === secretNumber) {
-          guessMessage.innerHTML = `BOOM. Correct guess, you win!`;
-        } else if (userGuess > secretNumber) {
-          guessMessage.innerHTML = `You guessed ${userGuess}. That is too high.`;
-        } else if (userGuess < secretNumber) {
-          guessMessage.innerHTML = `You guessed ${userGuess}. That is too low.`;
-        } else {
-          guessMessage.innerHTML = `Oops, something went wrong. Please refresh page.`;
-        }
-      }
-
-      function enableClear() {
-        let guessField = document.getElementById('user-guess');
-        let clearButton = document.getElementById('clear');
-        if (guessField.value == '') {
-          clearButton.disabled=true;
-        } else {
-          clearButton.disabled=false;
-        }
-      }
-
-      function enableReset() {
-        resetButton.disabled=false;
-      }
-
-      function resetGame() {
-        rangeLoEnd = 1
-        rangeHiEnd = 100
-        let rangeMessage = document.getElementById('range-feedback');
-        rangeMessage.innerHTML = `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
-
-        secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
-        guessMessage.innerHTML = 'Make your first guess below!';
-        document.getElementById('user-guess').value = '';
-        document.getElementById('range-low-end').value = '';
-        document.getElementById('range-high-end').value = '';
-        resetButton.disabled=true;
-      }
-    </script>
+    <script src="number-guesser.js"></script>
   </body>
 </HTML>

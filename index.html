@@ -23,7 +23,7 @@
     <div class=range-input>
       <input type="text" id="range-low-end" placeholder="Start at..." >
       <input type="text" id="range-high-end" placeholder="End at..." >
-      <input type="button" value="Submit Range" onclick="setRange()">
+      <input type="button" id="range-submit" value="Submit Range">
     </div>
 
     <div class=result-message>
@@ -36,7 +36,7 @@
 
     <div class=guess-form>
       <input type="text" id="user-guess" placeholder="Enter your guess" onkeyup="enableClear()">
-      <input type="button" value="Guess" onclick="validateInput()">
+      <input type="button" id ="guess-button" value="Guess" onclick="validateInput()">
       <button type="button" id="clear" onclick="document.getElementById('user-guess').value = ''" disabled>Clear</button>
     </div>
 

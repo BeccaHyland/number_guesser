@@ -9,9 +9,10 @@
   let resetButton = document.getElementById('reset');
   let guessFeedback = document.getElementById('guess-feedback');
   let winFeedback = document.getElementById('result-feedback');
+  document.getElementById("range-submit").addEventListener("click", setRange);
 
   // user can reset guessing range
-  function setRange () {
+  function setRange() {
     let loEntry = parseInt(document.getElementById('range-low-end').value);
     let hiEntry = parseInt(document.getElementById('range-high-end').value);
 
@@ -23,6 +24,7 @@
       rangeLoEnd = loEntry;
       rangeHiEnd = hiEntry;
       resetGame(rangeLoEnd, rangeHiEnd);
+      enableReset();
     }
   }
 

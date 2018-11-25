@@ -6,13 +6,15 @@
   // generate a random number between 1-100
   let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
 
-  let resetButton = document.getElementById('reset');
   let guessFeedback = document.getElementById('guess-feedback');
   let winFeedback = document.getElementById('result-feedback');
+  let guessButton = document.getElementById('guess-submit');
   let rangeButton = document.getElementById('range-submit');
+  let resetButton = document.getElementById('reset');
 
-  resetButton.addEventListener("click", resetGame);
+  guessButton.addEventListener("click", validateInput);
   rangeButton.addEventListener("click", setRange);
+  resetButton.addEventListener("click", resetGame);
 
   // user can reset guessing range
   function setRange() {

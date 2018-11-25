@@ -1,9 +1,9 @@
 # Number Guesser
 
-[Try it out!](https://beccahyland.github.io/number_guesser/)
+[Try it out here!](https://beccahyland.github.io/number_guesser/)
 
 written in JavaScript
 
 * increases difficulty after win
 * allows user to input guessing range
-* allows cheat!
+* allows cheat! can you figure out how?

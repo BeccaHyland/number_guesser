@@ -1,4 +1,3 @@
-
 // set default guessing range limits
 let rangeLoEnd = 1
 let rangeHiEnd = 100
@@ -6,21 +5,25 @@ let rangeHiEnd = 100
 // generate a random number between 1-100
 let secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
 
-let guessFeedback = document.getElementById('guess-feedback');
-let winFeedback = document.getElementById('result-feedback');
+var rangeFeedback = document.getElementById('range-feedback');
+var guessFeedback = document.getElementById('guess-feedback');
+var winFeedback = document.getElementById('result-feedback');
 
-let rangeButton = document.getElementById('range-submit');
-let guessButton = document.getElementById('guess-submit');
-let clearButton = document.getElementById('clear');
-let resetButton = document.getElementById('reset');
+var rangeButton = document.getElementById('range-submit');
+var guessButton = document.getElementById('guess-submit');
+var clearButton = document.getElementById('clear');
+var resetButton = document.getElementById('reset');
 
 rangeButton.addEventListener("click", setRange);
 guessButton.addEventListener("click", validateInput);
 clearButton.addEventListener("click", clearGuess);
 resetButton.addEventListener("click", resetGame);
 
-let guessField = document.getElementById('user-guess');
+var guessField = document.getElementById('user-guess');
 guessField.addEventListener("keyup", enableClear);
+
+// In all cases below the function keyword is used instead of arrow notation
+// This is for readability since it is my first JS program
 
 // user can reset guessing range
 function setRange() {
@@ -40,17 +43,18 @@ function setRange() {
 }
 
 function validateInput() {
-  const x = document.getElementById("user-guess").value;
+  const x = guessField.value;
   if (x == "cheat") {
     guessFeedback.innerHTML =
     `Decided to cheat, huh? OK, the answer is ${secretNumber}.`;
+    guessField.value = '';
     enableReset();
   } else if (isNaN(x)) {
-    document.getElementById('user-guess').value = '';
+    guessField.value = '';
     alert
     (`Oops, that's not a number. Try a guess between ${rangeLoEnd}-${rangeHiEnd}!`);
   } else if (x < rangeLoEnd || x > rangeHiEnd) {
-    document.getElementById('user-guess').value = '';
+    guessField.value = '';
     alert
     (`Oops! Your guess was not between ${rangeLoEnd}-${rangeHiEnd}, try again!`);
   } else
@@ -62,7 +66,7 @@ function validateInput() {
 // evaluate the guess
 // display feedback
 function evaluateGuess() {
-  let userGuess = parseInt(document.getElementById("user-guess").value);
+  let userGuess = parseInt(guessField.value);
   winFeedback.innerHTML = ''
   // the guess is compared to the secret to see if it's too high, too low, or a match
   // display the guess and whether it's too high, too low, or match
@@ -83,7 +87,7 @@ function evaluateGuess() {
 }
 
 function clearGuess() {
-  document.getElementById('user-guess').value = '';
+  guessField.value = '';
   clearButton.disabled=true;
 }
 
@@ -98,7 +102,6 @@ function resetGame(newRangeLoEnd = 1, newRangeHiEnd = 100) {
     winFeedback.innerHTML = '';
   }
   // reset the feedback informing user of current range
-  let rangeFeedback = document.getElementById('range-feedback');
   rangeFeedback.innerHTML =
   `Guess a number between ${rangeLoEnd} and ${rangeHiEnd}...`
 
@@ -106,7 +109,7 @@ function resetGame(newRangeLoEnd = 1, newRangeHiEnd = 100) {
   secretNumber = Math.floor(Math.random() * rangeHiEnd) + rangeLoEnd;
   guessFeedback.innerHTML = 'Make your first guess below:';
   winFeedback.innerHTML = '';
-  document.getElementById('user-guess').value = '';
+  guessField.value = '';
   document.getElementById('range-low-end').value = '';
   document.getElementById('range-high-end').value = '';
   clearButton.disabled=true;
@@ -114,8 +117,6 @@ function resetGame(newRangeLoEnd = 1, newRangeHiEnd = 100) {
 }
 
 function enableClear() {
-  let guessField = document.getElementById('user-guess');
-  let clearButton = document.getElementById('clear');
   if (guessField.value == '') {
     clearButton.disabled=true;
   } else {
